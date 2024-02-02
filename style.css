@@ -1,5 +1,5 @@
 body {
-    background-color: gray;
+    background-color: rgb(169, 182, 144);
     color: white;
     margin: 0 auto;
     width: fit-content;
@@ -20,11 +20,11 @@ li{
 }
 
 a{
-    color: orange;
+    color: rgb(50, 85, 27);
     text-decoration: none;
 }
 
 a:hover{
-    color: aqua;
+    color: rgb(252, 197, 240);
     text-decoration: overline;
 }

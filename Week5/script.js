@@ -86,8 +86,8 @@ scene.add(torusKnot)
 // SUN
 const sunGeometry = new THREE.SphereGeometry()
 const sunMaterial = new THREE.MeshLambertMaterial({
-    emissive: new THREE.Color('orange'),
-    emissiveIntensity: 20
+    emissive: new THREE.Color('purple'),
+    emissiveIntensity: 200
 })
 const sun = new THREE.Mesh(sunGeometry, sunMaterial)
 scene.add(sun)

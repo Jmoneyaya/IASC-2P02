@@ -11,13 +11,14 @@ const sizes = {
     height: window.innerHeight,
     aspectRatio: window.innerWidth / window.innerHeight
 }
+
 /**********
 ** SCENE **
 ***********/
 // Canvas
 const canvas = document.querySelector('.webgl')
 
-// scene
+// Scene
 const scene = new THREE.Scene()
 
 // Camera
@@ -32,16 +33,17 @@ scene.add(camera)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true
+  canvas: canvas,
+  antialias: true
 })
 renderer.setSize(sizes.width, sizes.height)
-renderer.shadowMap.enable = true
+renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+
 /***********
 ** MESHES **
 ************/
@@ -59,7 +61,7 @@ caveWall.receiveShadow = true
 scene.add(caveWall)
 
 // barrierWall
-const barrierWallGeometry = new THREE.PlaneGeometry(10,2)
+const barrierWallGeometry = new THREE.PlaneGeometry(10, 2)
 const barrierWall = new THREE.Mesh(barrierWallGeometry, caveMaterial)
 barrierWall.rotation.y = Math.PI * 0.5
 barrierWall.position.set(5, -1.5, 0)
@@ -68,18 +70,19 @@ scene.add(barrierWall)
 // caveFloor
 const caveFloorGeometry = new THREE.PlaneGeometry(10, 10)
 const caveFloor = new THREE.Mesh(caveFloorGeometry, caveMaterial)
-caveFloor.rotation. x = Math.PI * 0.5
+caveFloor.rotation.x = Math.PI * 0.5
 caveFloor.position.set(0, -2.5, 0)
 scene.add(caveFloor)
-// OBJECTS
 
+// OBJECTS
 // torusKnot
 const torusKnotGeometry = new THREE.TorusKnotGeometry(1, 0.2)
 const torusKnotMaterial = new THREE.MeshNormalMaterial()
 const torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial)
-torusKnot.position.set(6,1.5, 0)
+torusKnot.position.set(6, 1.5, 0)
 torusKnot.castShadow = true
 scene.add(torusKnot)
+
 // SUN
 const sunGeometry = new THREE.SphereGeometry()
 const sunMaterial = new THREE.MeshLambertMaterial({
@@ -92,11 +95,13 @@ scene.add(sun)
 /***********
 ** LIGHTS **
 ************/
+/*
 // Ambient Light
 const ambientLight = new THREE.AmbientLight(
     new THREE.Color('white')
 )
 scene.add(ambientLight)
+*/
 
 // Direcional Light
 const directionalLight = new THREE.DirectionalLight(
@@ -109,6 +114,11 @@ directionalLight.castShadow = true
 directionalLight.shadow.mapSize.width = 1024
 directionalLight.shadow.mapSize.height = 1024
 scene.add(directionalLight)
+
+// Directional Light Helper
+//const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+//scene.add(directionalLightHelper)
+
 /*******
 ** UI **
 ********/
@@ -125,10 +135,10 @@ uiObject.reset = () =>
 const lightPositionFolder = ui.addFolder('Directional Light Position')
 
 lightPositionFolder
-.add(directionalLight.position, 'x')
-.min(-10)
-.max(20)
-.step(0.1)
+    .add(directionalLight.position, 'x')
+    .min(-10)
+    .max(20)
+    .step(0.1)
 
 lightPositionFolder
     .add(directionalLight.position, 'y')
@@ -143,39 +153,41 @@ lightPositionFolder
     .step(0.1)
 
 lightPositionFolder
-.add(uiObject, 'reset')
-.name('Reset position')
+    .add(uiObject, 'reset')
+    .name('Reset position')
 
 
 /*******************
 ** ANIMATION LOOP **
 ********************/
 const clock = new THREE.Clock()
+
 // Animate
 const animation = () =>
 {
+    // Return elapsedTime
+    const elapsedTime = clock.getElapsedTime()
 
-// Return elapsedTime
-const elapsedTime = clock.getElapsedTime()
-// Animate Objects
-torusKnot.rotation.y = elapsedTime
-torusKnot.position.z = Math.sin(elapsedTime * 0.5) * 2
+    // Animate Objects
+    torusKnot.rotation.y = elapsedTime
+    torusKnot.position.z = Math.sin(elapsedTime * 0.5) * 2
 
-// Update directionalLightHelper
+    // Update directionalLightHelper
+    //directionalLightHelper.update()
 
-//directionalLightHelper.update()
+    // Update sun position to match directionalLight position
+    sun.position.copy(directionalLight.position)
 
-// Update sun position to match directionalLight position
-sun.position.copy(directionalLight.position)
+    console.log(camera.position)
 
-console.log(camera.position)
-// Controls
-controls.update()
+    // Controls
+    controls.update()
 
-// Renderer
-renderer.render(scene, camera)
+    // Renderer
+    renderer.render(scene, camera)
 
-// Request next frame
-window.requestAnimationFrame(animation)
+    // Request next frame
+    window.requestAnimationFrame(animation)
 }
- animation()
+
+animation()

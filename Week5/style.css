@@ -1,10 +1,10 @@
-h1 {
-    color: white;
+h1{
     font-size: 48px;
+    color: white;
     text-align: center;
 }
 
-.webgl {
+.webgl{
     position: fixed;
     top: 0;
     left: 0;

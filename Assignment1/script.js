@@ -178,15 +178,17 @@ document.querySelector('#restart').onclick = function() {
     document.querySelector('#part-two').classList.add('hidden')
     document.querySelector('#part-one').classList.remove('hidden')
     domObject.part = 1
-}
-    // reset domObject changes
-    domObject.firstChange = false
-    domObject.secondChange = false
-    domObject.thirdChange = false
-    domObject.fourthChange = false
 
-    //reset directionalLight
+     // reset domObject changes
+     domObject.firstChange = false
+     domObject.secondChange = false
+     domObject.thirdChange = false
+     domObject.fourthChange = false
+ 
+      //reset directionalLight
     directionalLight.position.set(10, 2.5, 0)
+}
+   
 
 // first change
 document.querySelector('#first-change').onclick = function() {

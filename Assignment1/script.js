@@ -76,12 +76,15 @@ scene.add(caveFloor)
 
 // OBJECTS
 // torusKnot
-const torusKnotGeometry = new THREE.TorusKnotGeometry(1, 0.2)
+/* const torusKnotGeometry = new THREE.TorusKnotGeometry(1, 0.2)
 const torusKnotMaterial = new THREE.MeshNormalMaterial()
-const torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial)
-torusKnot.position.set(6, 1.5, 0)
-torusKnot.castShadow = true
-scene.add(torusKnot)
+const torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial) */
+const geometry = new THREE.TorusGeometry( 1, 0.2); 
+const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
+const torus = new THREE.Mesh( geometry, material ); scene.add( torus );
+torus.position.set(8, 1, 0)
+torus.castShadow = true
+scene.add(torus)
 
 // SUN
 const sunGeometry = new THREE.SphereGeometry()
@@ -251,19 +254,19 @@ const animation = () =>
 
     // first change
     if(domObject.firstChange){
-        torusKnot.rotation.y = elapsedTime
-        torusKnot.rotation.z = elapsedTime
+        torus.rotation.y = elapsedTime
+        torus.rotation.z = elapsedTime
 
     }
 
     // second change
     if(domObject.secondChange){
-        torusKnot.position.y = Math.sin(elapsedTime * 0.5) * 6
+        torus.position.y = Math.sin(elapsedTime * 0.5) * 6
     } 
 
     // third change
     if(domObject.thirdChange){
-        torusKnot.position.y = 2
+        torus.position.y = 2
     }
 
     // fourth change

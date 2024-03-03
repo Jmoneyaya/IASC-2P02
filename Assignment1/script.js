@@ -86,6 +86,12 @@ torus.position.set(8, 1, 0)
 torus.castShadow = true
 scene.add(torus)
 
+/*const geometry = new THREE.SphereGeometry( 15, 32, 16 ); 
+new material = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
+const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
+sphere.position.set(8, 1, 0)
+sphere.castShadow = true
+scene.add(sphere)*/
 // SUN
 const sunGeometry = new THREE.SphereGeometry()
 const sunMaterial = new THREE.MeshLambertMaterial({
@@ -261,12 +267,12 @@ const animation = () =>
 
     // second change
     if(domObject.secondChange){
-        torus.position.y = Math.sin(elapsedTime * 0.5) * 6
+        torus.position.z = Math.sin(elapsedTime * 0.5) * 6
     } 
 
     // third change
     if(domObject.thirdChange){
-        torus.position.y = 2
+        torus.position.z = 0
     }
 
     // fourth change

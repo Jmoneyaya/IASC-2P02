@@ -1,7 +1,7 @@
 body{
-    width: 40%;
+    width: 35%;
     color: white;
-    margin-left: 5%;
+    margin-left: 1%;
     text-shadow: 0.5px 0.5px 1px #ffffff; 
     
 }
@@ -9,18 +9,18 @@ body{
 h1{
     font-size: 48px;
     color: white;
-    text-align: center;
+    text-align: Left;
 }
 
 h2{
     font-size: 36px;
-    text-align: center;
+    text-align: Left;
     text-shadow: 0.5px 0.5px 1px #ffffff; 
 }
 
 p {
     font-size: 28px;
-    margin-bottom: 24px;
+    margin-bottom: 2px;
 }
 .clickable{
     color:rgb(255, 171, 185);

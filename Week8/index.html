@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+    <title>3D Portfolio</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- three.js importmap -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://ga.jspm.io/npm:three@0.158.0/build/three.module.js",
+                "OrbitControls": "https://ga.jspm.io/npm:three@0.158.0/examples/jsm/controls/OrbitControls.js",
+                "lil-gui": "https://ga.jspm.io/npm:lil-gui@0.19.1/dist/lil-gui.esm.js",
+                "GLTFLoader": "https://ga.jspm.io/npm:three@0.158.0/examples/jsm/loaders/GLTFLoader.js"
+            }
+        }
+    </script>
+
+    <!-- three.js -->
+    <script src="script.js" type="module"></script>
+</head>
+<body>
+    <!-- canvas -->
+    <canvas class="webgl"></canvas>
+
+    <!-- splash -->
+    <section class="splash">
+        <h1>Jameliaaaa</h1>
+    </section>
+
+    <!-- content -->
+    <section class="content" id="first">
+        <h1>About me</h1>
+        <p>I am a pink blob fish that lurks in the dark depths of the ocean. Many say I look pretty ugly in pictures but my Grandma tells me I'm a handsome young man so I'll trust her.</p>
+        <p><span class="clickable" id="click1">Watch me conquer the earth</span></p>
+    </section>
+
+    <section class="content hidden" id="second">
+        <h1>Interactive Essay</h1>
+        <p> My interactive essay was built upon my Plato Prototype, I created my own
+            version of Plato's Allegory of the Cave. I created a 3D cave scene in
+            Three.js and I wrote an essay that described my cave scene.</p>
+        <p><span class="clickable" id="click2">Moving on</span></p>
+    </section>
+
+    <section class="content hidden" id="third">
+        <h1>Data Visualization</h1>
+        <p>I have yet to come up with an idea for what I want to do for this project. I think I want to do a book I really enjoyed like Cilka's journey, though the project would probably be despressing</p>
+        <p><span class="clickable" id="click3">Back to where you started</span></p>
+    </section>
+
+    <section class="footer">
+        <p>Porsche 911 Carrera 4S by Karol Miklas. <a href="https://sketchfab.com/3d-models/free-porsche-911-carrera-4s-d01b254483794de3819786d93e0e1ebf" target="_blank">View on Sketchfab</a>.</p>
+    </section>
+</body>

@@ -1,0 +1,68 @@
+body {
+    background-color: #404040;
+    margin: 0 auto;
+    color: white;
+}
+
+.webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    z-index: -1;
+}
+
+.splash {
+    position: absolute;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.splash h1 {
+    font-size: 80px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    font-size: 50px;
+    padding-left: 50%;
+}
+
+.content h1 {
+    margin-bottom: 0px;
+}
+
+.clickable {
+    color: orange;
+    cursor: grab;
+}
+
+.clickable:hover {
+    color: aqua;
+}
+
+.hidden {
+    display: none;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+}
+
+.footer a{
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

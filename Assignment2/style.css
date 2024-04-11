@@ -1,0 +1,54 @@
+/*Body*/
+body {
+    margin: 0 auto;
+   width: 80%;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+p{
+    font-size: 20px
+}
+
+/*headers*/
+h1, h2 {
+   font-size: center;
+}
+
+h1{
+    font-size: 48px
+}
+
+h2{
+    font-size: 36px
+}
+
+/*canvas*/
+.canvas-container {
+    margin: 0 auto;
+    text-align: center;
+}
+.canvas-container p{
+    font-size: 20px;
+    color: rgb(199, 130, 2);
+}
+canvas{
+    border-radius: 10px 10px 10px 10px;
+}
+
+
+.lil-gui .name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#lil-gui-name-1, #lil-gui-name-5 {
+    color: rgb(213, 147, 243);
+}
+
+#lil-gui-name-2, #lil-gui-name-6 {
+    color: rgb(250, 162, 90);
+}
+
+#lil-gui-name-3, #lil-gui-name-7 {
+    color: rgb(250, 167, 167);
+}

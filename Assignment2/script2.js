@@ -16,11 +16,11 @@ const sizes = {
 ** SCENE **
 ***********/
 // Canvas
-const canvas = document.querySelector('.webgl')
+const canvas = document.querySelector('.webgl2')
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color('green')
+scene.background = new THREE.Color('pink')
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
@@ -53,32 +53,34 @@ scene.add(directionalLight)
 /***********
 ** MESHES **
 ************/
-// Cube Geometry
-const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+// Torus Geometry
+const torusGeometry = new THREE.TorusGeometry(0.5, 0.2)
 
-// Cube Materials
-const purpleMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('purple')
+// Torus Materials
+const violetMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('violet')
 })
-const orangeMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('orange')
+const aquaMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('aqua')
 })
-const pinkMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('pink')
+const blueMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('white')
 })
 
-const drawCube = (i, material) =>
+const drawTorus = (i, material) =>
 {
-    const cube = new THREE.Mesh(cubeGeometry, material)
-    cube.position.x = (Math.random() - 0.5) * 10
-    cube.position.z = (Math.random() - 0.5) * 10
-    cube.position.y = i - 10
+    const torus = new THREE.Mesh(torusGeometry, material)
+    torus.position.x = (Math.random() - 0.5) * 10
+    torus.position.z = (Math.random() - 0.5) * 10
+    torus.position.y = i - 10
 
-    cube.rotation.x = Math.random() * 2 * Math.PI
-    cube.rotation.y = Math.random() * 2 * Math.PI
-    cube.rotation.z = Math.random() * 2 * Math.PI
+    torus.rotation.x = Math.random() * 2 * Math.PI
+    torus.rotation.y = Math.random() * 2 * Math.PI
+    torus.rotation.z = Math.random() * 2 * Math.PI
 
-    scene.add(cube)
+    torus.randomizer = Math.random()
+
+    scene.add(torus)
 }
 
 
@@ -90,10 +92,11 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'cupboard',
-    term2: 'hat',
-    term3: 'broom',
+    term1: 'dudley',
+    term2: 'snape',
+    term3: 'malfoy',
     rotateCamera: false,
+    animateBubbles: false,
 }
 
 // Text Parsers
@@ -110,13 +113,13 @@ const parseTextandTerms = () =>
     //console.log(uiobj.textArray)
 
     // Find term 1
-    findTermInParsedText(uiobj.term1, purpleMaterial)
+    findTermInParsedText(uiobj.term1, violetMaterial)
 
     // Find term 2
-    findTermInParsedText(uiobj.term2, orangeMaterial)
+    findTermInParsedText(uiobj.term2, aquaMaterial)
 
     // Find term 3
-    findTermInParsedText(uiobj.term3, pinkMaterial)
+    findTermInParsedText(uiobj.term3, blueMaterial)
 
 }
 
@@ -134,7 +137,7 @@ const findTermInParsedText = (term, material) =>
          // call drawCube function 5 times using converted n value
          for(let a=0; a < 5; a++)
          {
-            drawCube(n, material)
+            drawTorus(n, material)
          }
 
         }
@@ -152,26 +155,30 @@ fetch("https://raw.githubusercontent.com/amephraim/nlp/master/texts/J.%20K.%20Ro
     )
 // UI
 const ui = new dat.GUI({
-    container: document.querySelector('#parent1')
+    container: document.querySelector('#parent2')
 })
 
 // Interaction Folders
 const createInteractionFolders = () =>
 {
-    // Cubes Folder
-    const cubesFolder = ui.addFolder('Filter Terms')
+    // torus Folder
+    const torusFolder = ui.addFolder('Filter Terms')
 
-    cubesFolder
-        .add(purpleMaterial, 'visible')
+    torusFolder
+        .add(violetMaterial, 'visible')
         .name(`${uiobj.term1}`)
 
-    cubesFolder
-        .add(orangeMaterial, 'visible')
+    torusFolder
+        .add(aquaMaterial, 'visible')
         .name(`${uiobj.term2}`)
 
-    cubesFolder
-        .add(pinkMaterial, 'visible')
+    torusFolder
+        .add(blueMaterial, 'visible')
         .name(`${uiobj.term3}`)
+
+    torusFolder
+        .add(uiobj, 'animateBubbles')
+        .name('Animate Bubbles')
 
     // Camera Folder
     const cameraFolder = ui.addFolder('Camera')
@@ -187,6 +194,7 @@ createInteractionFolders()
 ********************/
 const clock = new THREE.Clock()
 
+
 // Animate
 const animation = () =>
 {
@@ -201,6 +209,19 @@ const animation = () =>
     {
         camera.position.x = Math.sin(elapsedTime * 0.2) * 16
         camera.position.z = Math.cos(elapsedTime * 0.2) * 16
+    }
+
+    // Animate Bubbles
+    if(uiobj.animateBubbles){
+        for(let i=0; i < scene.children.length; i++)
+        {
+            if(scene.children[i].type === "Mesh")
+            {
+                scene.children[i].scale.x = Math.sin(elapsedTime)
+                scene.children[i].scale.y = Math.sin(elapsedTime)
+                scene.children[i].scale.z = Math.sin(elapsedTime)
+            }
+        }
     }
 
     // Renderer

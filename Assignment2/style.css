@@ -7,12 +7,14 @@ body {
 }
 
 p{
-    font-size: 20px
+    font-size: 20px;
+    color: rgb(5, 26, 5);
 }
 
 /*headers*/
 h1, h2 {
    font-size: center;
+   color:rgb(30, 82, 35)
 }
 
 h1{
@@ -30,7 +32,8 @@ h2{
 }
 .canvas-container p{
     font-size: 20px;
-    color: rgb(30, 82, 35);
+    color: rgb(189, 98, 151);
+    
 }
 canvas{
     border-radius: 10px 10px 0px 0px;
@@ -91,5 +94,5 @@ border-radius: 10px;
 }
 
 #lil-gui-name-7{
-    color: white;
+    color: lime;
 }

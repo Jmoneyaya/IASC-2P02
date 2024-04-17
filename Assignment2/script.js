@@ -7,7 +7,7 @@ import { OrbitControls } from "OrbitControls"
 ***********/
 // Sizes
 const sizes = {
-    width: window.innerWidth / 2.5,
+    width: window.innerWidth / 1.5,
     height: window.innerHeight / 1.5,
     aspectRatio: 1
 }
@@ -20,7 +20,7 @@ const canvas = document.querySelector('.webgl')
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color('green')
+scene.background = new THREE.Color('white')
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
@@ -53,10 +53,10 @@ scene.add(directionalLight)
 /***********
 ** MESHES **
 ************/
-// Cube Geometry
-const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+// torus Geometry
+const torusGeometry = new THREE.TorusGeometry(0.5, 0.2)
 
-// Cube Materials
+// torus Materials
 const purpleMaterial = new THREE.MeshStandardMaterial({
     color: new THREE.Color('purple')
 })
@@ -67,18 +67,22 @@ const pinkMaterial = new THREE.MeshStandardMaterial({
     color: new THREE.Color('pink')
 })
 
-const drawCube = (i, material) =>
+const drawTorus = (i, material) =>
 {
-    const cube = new THREE.Mesh(cubeGeometry, material)
-    cube.position.x = (Math.random() - 0.5) * 10
-    cube.position.z = (Math.random() - 0.5) * 10
-    cube.position.y = i - 10
+    const torus = new THREE.Mesh(torusGeometry, material)
+    torus.position.x = (Math.random() - 0.5) * 10
+    torus.position.z = (Math.random() - 0.5) * 10
+    torus.position.y = i - 10
 
-    cube.rotation.x = Math.random() * 2 * Math.PI
-    cube.rotation.y = Math.random() * 2 * Math.PI
-    cube.rotation.z = Math.random() * 2 * Math.PI
 
-    scene.add(cube)
+    torus.rotation.x = Math.random() * 2 * Math.PI
+    torus.rotation.y = Math.random() * 2 * Math.PI
+    torus.rotation.z = Math.random() * 2 * Math.PI
+
+    torus.randomizer = Math.random()
+
+    //caveFloor.position.set(0, -2.5, 0)
+    scene.add(torus)
 }
 
 
@@ -90,9 +94,9 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'cupboard',
-    term2: 'hat',
-    term3: 'broom',
+    term1: 'prim',
+    term2: 'gale',
+    term3: 'peeta',
     rotateCamera: false,
 }
 
@@ -131,10 +135,10 @@ const findTermInParsedText = (term, material) =>
          // convert i into n, which is a value between 0 and 20
          const n = (100 / uiobj.textArray.length) * i * 0.2
          
-         // call drawCube function 5 times using converted n value
+         // call drawtorus function 5 times using converted n value
          for(let a=0; a < 5; a++)
          {
-            drawCube(n, material)
+            drawTorus(n, material)
          }
 
         }
@@ -142,7 +146,7 @@ const findTermInParsedText = (term, material) =>
 }
 
 // Load source text
-fetch("https://raw.githubusercontent.com/amephraim/nlp/master/texts/J.%20K.%20Rowling%20-%20Harry%20Potter%201%20-%20Sorcerer's%20Stone.txt")
+fetch("https://raw.githubusercontent.com/pull-ups/ybigta_21winter/master/2021.%202.%204%20(%EB%AA%A9)%20wordcloud-konlpy/The%20Hunger%20Games.txt")
     .then(response => response.text())
     .then((data) =>
     {
@@ -158,18 +162,18 @@ const ui = new dat.GUI({
 // Interaction Folders
 const createInteractionFolders = () =>
 {
-    // Cubes Folder
-    const cubesFolder = ui.addFolder('Filter Terms')
+    // toruss Folder
+    const torussFolder = ui.addFolder('Filter Terms')
 
-    cubesFolder
+    torussFolder
         .add(purpleMaterial, 'visible')
         .name(`${uiobj.term1}`)
 
-    cubesFolder
+    torussFolder
         .add(orangeMaterial, 'visible')
         .name(`${uiobj.term2}`)
 
-    cubesFolder
+    torussFolder
         .add(pinkMaterial, 'visible')
         .name(`${uiobj.term3}`)
 

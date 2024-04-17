@@ -53,34 +53,35 @@ scene.add(directionalLight)
 /***********
 ** MESHES **
 ************/
-// Torus Geometry
-const torusGeometry = new THREE.TorusGeometry(0.5, 0.2)
+// sphere Geometry
+const sphereGeometry = new THREE.SphereGeometry(0.5)
 
-// Torus Materials
+// sphere Materials
 const violetMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('violet')
+    color: new THREE.Color('red')
 })
 const aquaMaterial = new THREE.MeshStandardMaterial({
     color: new THREE.Color('aqua')
 })
 const blueMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('white')
+    color: new THREE.Color('gold')
 })
 
-const drawTorus = (i, material) =>
+const drawSphere = (i, material) =>
 {
-    const torus = new THREE.Mesh(torusGeometry, material)
-    torus.position.x = (Math.random() - 0.5) * 10
-    torus.position.z = (Math.random() - 0.5) * 10
-    torus.position.y = i - 10
+    const sphere = new THREE.Mesh(sphereGeometry, material)
+    sphere.position.x = (Math.random() - 0.5) * 10
+    sphere.position.z = (Math.random() - 0.5) * 10
+    sphere.position.y = i - 10
 
-    torus.rotation.x = Math.random() * 2 * Math.PI
-    torus.rotation.y = Math.random() * 2 * Math.PI
-    torus.rotation.z = Math.random() * 2 * Math.PI
+    sphere.rotation.x = Math.random() * 2 * Math.PI
+    sphere.rotation.y = Math.random() * 2 * Math.PI
+    sphere.rotation.z = Math.random() * 2 * Math.PI
+    
 
-    torus.randomizer = Math.random()
+    sphere.randomizer = Math.random()
 
-    scene.add(torus)
+    scene.add(sphere)
 }
 
 
@@ -92,9 +93,9 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'dudley',
-    term2: 'snape',
-    term3: 'malfoy',
+    term1: 'capital',
+    term2: 'district',
+    term3: '12',
     rotateCamera: false,
     animateBubbles: false,
 }
@@ -137,7 +138,7 @@ const findTermInParsedText = (term, material) =>
          // call drawCube function 5 times using converted n value
          for(let a=0; a < 5; a++)
          {
-            drawTorus(n, material)
+            drawSphere(n, material)
          }
 
         }
@@ -145,7 +146,7 @@ const findTermInParsedText = (term, material) =>
 }
 
 // Load source text
-fetch("https://raw.githubusercontent.com/amephraim/nlp/master/texts/J.%20K.%20Rowling%20-%20Harry%20Potter%201%20-%20Sorcerer's%20Stone.txt")
+fetch("https://raw.githubusercontent.com/pull-ups/ybigta_21winter/master/2021.%202.%204%20(%EB%AA%A9)%20wordcloud-konlpy/The%20Hunger%20Games.txt")
     .then(response => response.text())
     .then((data) =>
     {
@@ -161,22 +162,23 @@ const ui = new dat.GUI({
 // Interaction Folders
 const createInteractionFolders = () =>
 {
-    // torus Folder
-    const torusFolder = ui.addFolder('Filter Terms')
+    // sphere Folder
+    const sphereFolder = ui.addFolder('Filter Terms')
 
-    torusFolder
+    sphereFolder
         .add(violetMaterial, 'visible')
         .name(`${uiobj.term1}`)
 
-    torusFolder
+    sphereFolder
         .add(aquaMaterial, 'visible')
         .name(`${uiobj.term2}`)
 
-    torusFolder
+    sphereFolder
         .add(blueMaterial, 'visible')
         .name(`${uiobj.term3}`)
+        
 
-    torusFolder
+    sphereFolder
         .add(uiobj, 'animateBubbles')
         .name('Animate Bubbles')
 

@@ -7,7 +7,7 @@ import { OrbitControls } from "OrbitControls"
 ***********/
 // Sizes
 const sizes = {
-    width: window.innerWidth / 1.5,
+    width: window.innerWidth / 2.5,
     height: window.innerHeight / 1.5,
     aspectRatio: 1
 }

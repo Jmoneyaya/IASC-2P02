@@ -56,21 +56,23 @@ scene.add(directionalLight)
 // sphere Geometry
 const sphereGeometry = new THREE.SphereGeometry(0.5)
 
+
+
 // sphere Materials
-const violetMaterial = new THREE.MeshStandardMaterial({
+const redMaterial = new THREE.MeshStandardMaterial({
     color: new THREE.Color('red')
 })
 const aquaMaterial = new THREE.MeshStandardMaterial({
     color: new THREE.Color('aqua')
 })
-const blueMaterial = new THREE.MeshStandardMaterial({
+const goldMaterial = new THREE.MeshStandardMaterial({
     color: new THREE.Color('gold')
 })
 
 const drawSphere = (i, material) =>
 {
     const sphere = new THREE.Mesh(sphereGeometry, material)
-    sphere.position.x = (Math.random() - 0.5) * 10
+    sphere.position.x = (0.5) * 10
     sphere.position.z = (Math.random() - 0.5) * 10
     sphere.position.y = i - 10
 
@@ -83,8 +85,7 @@ const drawSphere = (i, material) =>
 
     scene.add(sphere)
 }
-
-
+    
 /**********************
 ** TEXT PARSERS & UI **
 ***********************/
@@ -114,13 +115,13 @@ const parseTextandTerms = () =>
     //console.log(uiobj.textArray)
 
     // Find term 1
-    findTermInParsedText(uiobj.term1, violetMaterial)
+    findTermInParsedText(uiobj.term1, redMaterial)
 
     // Find term 2
     findTermInParsedText(uiobj.term2, aquaMaterial)
 
     // Find term 3
-    findTermInParsedText(uiobj.term3, blueMaterial)
+    findTermInParsedText(uiobj.term3, goldMaterial)
 
 }
 
@@ -141,9 +142,13 @@ const findTermInParsedText = (term, material) =>
             drawSphere(n, material)
          }
 
+
         }
     }
 }
+
+
+
 
 // Load source text
 fetch("https://raw.githubusercontent.com/pull-ups/ybigta_21winter/master/2021.%202.%204%20(%EB%AA%A9)%20wordcloud-konlpy/The%20Hunger%20Games.txt")
@@ -166,7 +171,7 @@ const createInteractionFolders = () =>
     const sphereFolder = ui.addFolder('Filter Terms')
 
     sphereFolder
-        .add(violetMaterial, 'visible')
+        .add(redMaterial, 'visible')
         .name(`${uiobj.term1}`)
 
     sphereFolder
@@ -174,13 +179,13 @@ const createInteractionFolders = () =>
         .name(`${uiobj.term2}`)
 
     sphereFolder
-        .add(blueMaterial, 'visible')
+        .add(goldMaterial, 'visible')
         .name(`${uiobj.term3}`)
         
 
-    sphereFolder
+    /*sphereFolder
         .add(uiobj, 'animateBubbles')
-        .name('Animate Bubbles')
+        .name('Animate Bubbles')*/
 
     // Camera Folder
     const cameraFolder = ui.addFolder('Camera')
@@ -213,7 +218,7 @@ const animation = () =>
         camera.position.z = Math.cos(elapsedTime * 0.2) * 16
     }
 
-    // Animate Bubbles
+    /* Animate Bubbles
     if(uiobj.animateBubbles){
         for(let i=0; i < scene.children.length; i++)
         {
@@ -224,7 +229,7 @@ const animation = () =>
                 scene.children[i].scale.z = Math.sin(elapsedTime)
             }
         }
-    }
+    }*/
 
     // Renderer
     renderer.render(scene, camera)
